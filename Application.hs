@@ -18,6 +18,10 @@ import System.Log.FastLogger (newStdoutLoggerSet, defaultBufSize)
 import Network.Wai.Logger (clockDateCacher)
 import Data.Default (def)
 import Yesod.Core.Types (loggerSet, Logger (Logger))
+import GithubRepo
+import Filesystem (listDirectory)
+import Filesystem.Path (splitExtensions)
+import Text.Markdown (markdown)
 
 -- Import all relevant handler modules here.
 -- Don't forget to add new modules to your cabal file!
@@ -60,12 +64,15 @@ makeFoundation conf = do
     loggerSet' <- newStdoutLoggerSet defaultBufSize
     (getter, _) <- clockDateCacher
 
+    cr <- githubRepo "https://github.com/snoyberg/hotsucks-content" "master" loadContent
+
     let logger = Yesod.Core.Types.Logger loggerSet' getter
         foundation = App
             { settings = conf
             , getStatic = s
             , httpManager = manager
             , appLogger = logger
+            , contentRepo = cr
             }
 
     return foundation
@@ -78,3 +85,22 @@ getApplicationDev =
     loader = Yesod.Default.Config.loadConfig (configSettings Development)
         { csParseExtra = parseExtra
         }
+
+loadContent :: FilePath -> IO (Map Text (Text, Html))
+loadContent dir = do
+    runResourceT
+         $ sourceDirectoryDeep False dir
+        $$ concatMapC toPair
+        =$ foldMapMC reader
+  where
+    toPair "README.md" = Nothing
+    toPair x =
+        case splitExtensions $ filename x of
+            (name, ["md"]) -> Just (fpToText name, x)
+            _ -> Nothing
+
+    reader (name, fp) =
+        sourceFile fp $$ takeCE 1000000 =$ do
+            title <- lineC foldC
+            content <- sinkLazy
+            return $ singletonMap name (title, markdown def content)

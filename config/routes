@@ -3,4 +3,6 @@
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
+/reload ReloadR ContentRepo contentRepo
+
 / HomeR GET POST

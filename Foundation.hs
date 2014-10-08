@@ -1,7 +1,6 @@
 module Foundation where
 
-import Prelude
-import Yesod
+import ClassyPrelude.Yesod
 import Yesod.Static
 import Yesod.Default.Config
 import Yesod.Default.Util (addStaticContentExternal)
@@ -13,6 +12,9 @@ import Settings (widgetFile, Extra (..))
 import Text.Jasmine (minifym)
 import Text.Hamlet (hamletFile)
 import Yesod.Core.Types (Logger)
+import GithubRepo
+
+type ContentRepo = GithubRepo (Map Text (Text, Html))
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -23,6 +25,7 @@ data App = App
     , getStatic :: Static -- ^ Settings for static file serving.
     , httpManager :: Manager
     , appLogger :: Logger
+    , contentRepo :: ContentRepo
     }
 
 instance HasHttpManager App where
@@ -117,3 +120,6 @@ getExtra = fmap (appExtra . settings) getYesod
 -- wiki:
 --
 -- https://github.com/yesodweb/yesod/wiki/Sending-email
+
+getContent :: Handler (Map Text (Text, Html))
+getContent = getYesod >>= liftIO . grContent . contentRepo

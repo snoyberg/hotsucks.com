@@ -7,6 +7,7 @@ module-template: ! 'module MODULE_NAME where
 extensions:
   TemplateHaskell: true
   OverloadedStrings: true
+  ImplicitPrelude: false
   QuasiQuotes: true
   TypeFamilies: true
   CPP: true
@@ -16,8 +17,11 @@ auto-hidden: []
 cabal-file: project.cabal
 version: 1
 extra-packages: ''
-ghc-args: []
+ghc-args:
+- -hide-package=temporary-rc
 excluded-modules:
 - app/DevelMain.hs
 - devel.hs
+- test/HomeTest.hs
+- test/TestImport.hs
 - test/main.hs

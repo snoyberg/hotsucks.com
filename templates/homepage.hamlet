@@ -2,13 +2,13 @@
 
 <div .container-fluid>
      <div .row>
-          <div .col-md-4>
+          <div .col-md-3>
                <nav>
                     <ul>
                         $forall (name, (title, _)) <- content
                             <li>
                                 <a href=@{StoryR name}>#{title}
-          <div .col-md-8>
+          <div .col-md-9>
             <p>
                This page is simply here to state that the HOT cable company in Israel is terrible.
                They're customer service is absolutely atrocious, bordering on harrassing.
@@ -19,3 +19,12 @@
             <p>If you're looking to get television service in Israel, use YES.
 
             <p>As necessary, this page will grow over time.
+
+            <p>
+               Note that this website is an open source project. You can
+               <a href="https://github.com/snoyberg/hotsucks.com">view the code on Github
+               as well as
+               <a href="https://github.com/snoyberg/hotsucks-content">view the content itself#
+               . The content is very simple text files. If you have a story you'd like to add,
+               <a href="https://github.com/snoyberg/hotsucks-content/new/master">it's just a few clicks away#
+               .

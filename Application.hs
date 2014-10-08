@@ -93,10 +93,9 @@ loadContent dir = do
         $$ concatMapC toPair
         =$ foldMapMC reader
   where
-    toPair "README.md" = Nothing
     toPair x =
         case splitExtensions $ filename x of
-            (name, ["md"]) -> Just (fpToText name, x)
+            (name, ["md"]) | name /= "README" -> Just (fpToText name, x)
             _ -> Nothing
 
     reader (name, fp) =

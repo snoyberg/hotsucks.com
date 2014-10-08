@@ -1,20 +1,21 @@
 <h1>HOT Sucks
 
-<p>
-   This page is simply here to state that the HOT cable company in Israel is terrible.
-   They're customer service is absolutely atrocious, bordering on harrassing.
-   I have been fighting with them for three months to agree to cancel my account.
-   As recently as two weeks ago, they are still sending us bills.
-   I have no fewer than <b>eight times</b> been told that I will get a call back from
-   them within 24 hours.
-   I have <i>not once</i> received a call back.
+<div .container-fluid>
+     <div .row>
+          <div .col-md-4>
+               <nav>
+                    <ul>
+                        $forall (name, (title, _)) <- content
+                            <li>
+                                <a href=@{StoryR name}>#{title}
+          <div .col-md-8>
+            <p>
+               This page is simply here to state that the HOT cable company in Israel is terrible.
+               They're customer service is absolutely atrocious, bordering on harrassing.
+               This site is a collection of stories from various affected individuals.
 
-<p>I do, however, regularly receive threatening phone calls from random other people in HOT
-   demanding to know why I haven't returned my cable boxes to them- which they have
-   on <b>three separate occasions</b> missed appointments to pick up.
+            <p>If you're looking to get internet in Israel, do yourself a favor: use Bezeq.
+            <p>If you're looking to get telephone in Israel, again: use Bezeq (or Golan Telecom for mobile).
+            <p>If you're looking to get television service in Israel, use YES.
 
-<p>If you're looking to get internet in Israel, do yourself a favor: use Bezeq.
-<p>If you're looking to get telephone in Israel, again: use Bezeq (or Golan Telecom for mobile).
-<p>If you're looking to get television service in Israel, use YES.
-
-<p>As necessary, this page will grow over time.
+            <p>As necessary, this page will grow over time.

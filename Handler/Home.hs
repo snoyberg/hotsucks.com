@@ -19,7 +19,7 @@ getHomeR = do
         handlerName = "getHomeR" :: Text
     defaultLayout $ do
         aDomId <- newIdent
-        setTitle "Welcome To Yesod!"
+        setTitle "Israel's cable company HOT Sucks"
         $(widgetFile "homepage")
 
 postHomeR :: Handler Html

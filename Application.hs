@@ -95,8 +95,13 @@ loadContent dir = do
   where
     toPair x =
         case splitExtensions $ filename x of
-            (name, ["md"]) | name /= "README" -> Just (fpToText name, x)
+            (name, ["md"]) | name `notMember` reserved -> Just (fpToText name, x)
             _ -> Nothing
+
+    reserved = asSet $ setFromList
+        [ "README"
+        , "HOME"
+        ]
 
     reader (name, fp) =
         sourceFile fp $$ takeCE 1000000 =$ do

@@ -14,7 +14,7 @@ import Text.Hamlet (hamletFile)
 import Yesod.Core.Types (Logger)
 import GithubRepo
 
-type ContentRepo = GithubRepo (Map Text (Text, Html))
+type ContentRepo = GithubRepo (Map Text (Text, Html), Html)
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -121,5 +121,5 @@ getExtra = fmap (appExtra . settings) getYesod
 --
 -- https://github.com/yesodweb/yesod/wiki/Sending-email
 
-getContent :: Handler (Map Text (Text, Html))
+getContent :: Handler (Map Text (Text, Html), Html)
 getContent = getYesod >>= liftIO . grContent . contentRepo

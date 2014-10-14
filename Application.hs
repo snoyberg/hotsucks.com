@@ -86,12 +86,14 @@ getApplicationDev =
         { csParseExtra = parseExtra
         }
 
-loadContent :: FilePath -> IO (Map Text (Text, Html))
+loadContent :: FilePath -> IO (Map Text (Text, Html), Html)
 loadContent dir = do
-    runResourceT
+    m <- runResourceT
          $ sourceDirectoryDeep False dir
         $$ concatMapC toPair
         =$ foldMapMC reader
+    home <- markdown def <$> readFile (dir </> "HOME.md")
+    return (m, home)
   where
     toPair x =
         case splitExtensions $ filename x of

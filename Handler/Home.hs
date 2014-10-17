@@ -4,6 +4,7 @@ module Handler.Home where
 import Import
 import Yesod.Form.Bootstrap3
     ( BootstrapFormLayout (..), renderBootstrap3, withSmallInput )
+import Yesod.Sitemap
 
 getHomeR :: Handler Html
 getHomeR = do
@@ -20,3 +21,21 @@ getStoryR name = do
     defaultLayout $ do
         setTitle $ toHtml title
         $(widgetFile "story")
+
+getSitemapR :: Handler TypedContent
+getSitemapR = do
+    (content, _) <- getContent
+    sitemapList $ home : map toSM (mapToList content)
+  where
+    home = SitemapUrl
+        { sitemapLoc = HomeR
+        , sitemapLastMod = Nothing
+        , sitemapChangeFreq = Just Weekly
+        , sitemapPriority = Just 1
+        }
+    toSM (name, _) = SitemapUrl
+        { sitemapLoc = StoryR name
+        , sitemapLastMod = Nothing
+        , sitemapChangeFreq = Just Monthly
+        , sitemapPriority = Just 0.7
+        }

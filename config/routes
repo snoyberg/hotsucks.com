@@ -7,3 +7,5 @@
 
 / HomeR GET
 /story/#Text StoryR GET
+
+/sitemap SitemapR GET

@@ -8,7 +8,7 @@ module Application
 import Import
 import Yesod.Default.Config
 import Yesod.Default.Main
-import Yesod.Default.Handlers
+import Yesod.Default.Handlers hiding (getRobotsR)
 import Network.Wai.Middleware.RequestLogger
     ( mkRequestLogger, outputFormat, OutputFormat (..), IPAddrSource (..), destination
     )

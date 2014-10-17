@@ -39,3 +39,6 @@ getSitemapR = do
         , sitemapChangeFreq = Just Monthly
         , sitemapPriority = Just 0.7
         }
+
+getRobotsR :: Handler Text
+getRobotsR = robots SitemapR

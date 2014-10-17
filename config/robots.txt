@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: /sitemap
+Sitemap: http://www.hotsucks.com/sitemap
